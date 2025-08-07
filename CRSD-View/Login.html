@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coursed Bug Api</title>
+
+  <!-- Font Google -->
+  <link rel="icon" href="https://files.catbox.moe/aorxh2.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Nosifer&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: black;
+      color: #b19cd9; /* Changed to light purple */
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    #particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 0;
+    }
+    
+    .card {
+      background: rgba(138, 43, 226, 0.04); /* Purple tint */
+      border: 1px solid rgba(138, 43, 226, 0.2); /* Purple border */
+      backdrop-filter: blur(8px);
+      padding: 30px 24px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      z-index: 2;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.4); /* Purple shadow */
+      animation: fadeIn 1s ease;
+    }
+
+    .buy-access {
+      margin-top: 16px;
+      display: inline-block;
+      font-size: 13px;
+      background: #b88aff;
+      padding: 10px 18px;
+      color: black;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(163, 113, 255, 0.3);
+    }
+
+    .buy-access:hover {
+      background: #9b6dff;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .icon {
+      font-size: 34px;
+      color: #8a2be2; /* Purple */
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 32px;
+      font-family: 'Playfair Display', serif;
+      color: #5a00cc;
+      text-shadow: 0 0 8px #a64dff;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #d6b3ff; /* Light purple */
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .form-group i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #8a2be2; /* Purple */
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 14px 14px 38px;
+      border-radius: 10px;
+      border: none;
+      background: #1a001a; /* Dark purple */
+      color: #b19cd9; /* Light purple */
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 15px;
+      background: linear-gradient(135deg, #8a2be2, #4b0082); /* Purple gradient */
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(138, 43, 226, 0.4); /* Purple shadow */
+    }
+    
+    .buy-access {
+      margin-top: 16px;
+      display: inline-block;
+      font-size: 13px;
+      background: #8a2be2; /* Purple */
+      padding: 10px 18px;
+      color: white;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(138, 43, 226, 0.4); /* Purple shadow */
+    }
+
+    .buy-access:hover {
+      background: #9932cc; /* Lighter purple */
+    }
+
+    .footer {
+      margin-top: 28px;
+      font-size: 10px;
+      color: #8a2be2; /* Purple */
+    }
+
+    .toast {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #8a2be2; /* Purple */
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 0 12px rgba(138, 43, 226, 0.4); /* Purple shadow */
+      opacity: 0;
+      animation: fadeInOut 3.8s ease forwards;
+      z-index: 10;
+    }
+
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+      }
+      10% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="particles" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;"></div>
+  <div class="card">
+    <div class="icon" style="text-align: center; margin-bottom: 15px;">
+      <img src="https://files.catbox.moe/aorxh2.png"
+           alt="Coursed Logo"
+           style="width: 80px; height: 80px; filter: drop-shadow(0 0 10px #8a2be2) drop-shadow(0 0 20px #8a2be2);">
+    </div>
+    <div class="title">CURSED L4FINITY</div>
+    <div class="subtitle">Welcome to cursed System Endpoint API Bug</div>
+
+    <form method="POST" action="/auth">
+      <div class="form-group">
+        <i class="fas fa-user"></i>
+        <input type="text" name="username" placeholder="Username" required />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-key"></i>
+        <input type="text" name="password" placeholder="Password" required />
+      </div>
+      <button type="submit">
+        <i class="fas fa-lock" style="margin-right: 8px;"></i>
+        G A T E W A Y &nbsp; A C C E S S
+        <i class="fas fa-lock" style="margin-left: 8px;"></i>
+      </button>
+    </form>
+
+    <a class="buy-access" href="https://t.me/DELION9Q" target="_blank">
+      <i class="fas fa-coins"></i> Buy Access
+    </a>
+
+    <div class="footer">© Coursed 999</div>
+  </div>
+
+  <div id="toast" class="toast" style="display:none;"></div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get("msg");
+    if (msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.style.display = "block";
+    }
+  </script>
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/gh/jnicol/particleground/jquery.particleground.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      particleground(document.getElementById('particles'), {
+        dotColor: '#b19cd9', /* Light purple dots */
+        lineColor: '#8a2be2', /* Purple lines */
+        minSpeedX: 0.1,
+        maxSpeedX: 0.3,
+        minSpeedY: 0.1,
+        maxSpeedY: 0.3,
+        density: 10000,
+        particleRadius: 3,
+      });
+    }, false);
+  </script>
+</body>
+</html>
